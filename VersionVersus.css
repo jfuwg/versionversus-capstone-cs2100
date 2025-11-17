@@ -294,6 +294,8 @@ video {
     display: block;
 }
 
+
+/* For Products page*/
 #products-header {
     text-align: center;
     font-size: 1.5em;
@@ -304,6 +306,7 @@ video {
     padding-left: 0;
 }
 
+/* Sets grid for products on display*/
 #products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -313,6 +316,7 @@ video {
     margin: auto;
 }
 
+/* The rest of the product css is to keep in line with how the Form looks.*/
 .product-card {
     background-color: #e2f5ff;
     border: 3px solid #0050e4;
@@ -360,11 +364,30 @@ video {
     padding: 1em 1em;
     border-radius: 8px;
     font-size: 1em;
+    font-weight: bold;
 }
 
 .product-card .snipcart-add-item:hover {
     background-color: #0050e4;
 }
+
+.snipcart-checkout-button {
+    background-color: #256ff8;
+    color: white;
+    border: none;
+    padding: 1em;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin: auto;
+}
+
+.checkout-container {
+    text-align: center; 
+}
+
 
 @media (min-width: 600px) {
     header {
