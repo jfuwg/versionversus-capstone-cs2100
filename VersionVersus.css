@@ -294,6 +294,78 @@ video {
     display: block;
 }
 
+#products-header {
+    text-align: center;
+    font-size: 1.5em;
+    
+}
+
+#products-header h2 {
+    padding-left: 0;
+}
+
+#products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2em;
+    padding: 2em;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.product-card {
+    background-color: #e2f5ff;
+    border: 3px solid #0050e4;
+    border-radius: 10px;
+    padding: 1.5em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin-top: 1em;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    margin-top: 1em;
+    color: #0050e4;
+    font-size: 1.5em;
+}
+
+.product-card p {
+    font-size: 1em;
+    margin-bottom: 1em;
+    padding: 0;
+}
+
+.product-card .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #256ff8;
+    margin-bottom: 1em;
+}
+
+
+.product-card .snipcart-add-item {
+    background-color: #256ff8;
+    color: white;
+    border: none;
+    padding: 1em 1em;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.product-card .snipcart-add-item:hover {
+    background-color: #0050e4;
+}
+
 @media (min-width: 600px) {
     header {
         grid-area: header;
