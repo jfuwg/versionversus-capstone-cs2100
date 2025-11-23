@@ -5,7 +5,8 @@
     <title>VersionVersus Final Fantasy VII VS Remake</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This article/comparison is about Final Fantasy VII and it's remake. It explores visuals, gameplay, story, and reasons for playing the original first.">
+    <meta name="description"
+        content="This article/comparison is about Final Fantasy VII and it's remake. It explores visuals, gameplay, story, and reasons for playing the original first.">
     <link rel="stylesheet" href="VersionVersus.css">
 </head>
 
@@ -60,8 +61,11 @@
                     a 1:1 remake with better graphics but this new experience is more interesting in my opinion. 1:1
                     remakes are boring to me.
                 </p>
-                <div class="articlepic"><img src="ff7og.jpg" alt="A picture of the Original Final Fantasy VII"></div>
-                <div class="articlepic"><img src="ff7re.jpg" alt="A picture of the Final Fantasy VII Remake"></div>
+                <div class="custom-image-slider">
+                    <img src="ff7og.jpg" class="slider-before" alt="Before image of OG FF7">
+                    <img src="ff7re.jpg" class="slider-after" alt="After image of FF7 Remake">
+                    <div class="slider-handle"></div>
+                </div>
                 <p>Story wise, it follows the original quite closely, but in a more expanded sense of course. It really
                     lets you
                     take in the city state of Midgar more than OG FF7 could. After all, it is the only setting of the
@@ -83,8 +87,11 @@
                     back then would imagine them. The battles are always so fun to look at, and it feels epic to play.
                     <br><br>
                 </p>
-                <div class="articlepic"><img src="ff7combat.jpg" alt="A picture of OG James"></div>
-                <div class="articlepic"><img src="ff7recombat.jpg" alt="A picture of new James"></div>
+                <div class="custom-image-slider">
+                    <img src="ff7combat.jpg" class="slider-before" alt="Before image of OG FF7 gameplay">
+                    <img src="ff7recombat.jpg" class="slider-after" alt="After image of FF7 Remake gameplay">
+                    <div class="slider-handle"></div>
+                </div>
                 <p>But how do the battles feel in gameplay? Well the original is turn based, as many RPGs were in that
                     day.
                     The combat system is truly amazing in both games thanks to the materia system, which allows you to
@@ -134,6 +141,63 @@
             <a href="mailto:jf00264@my.westga.edu">jf00264@my.westga.edu</a>
         </footer>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sliders = document.querySelectorAll(".custom-image-slider");
+
+            sliders.forEach((container) => {
+                const afterImage = container.querySelector(".slider-after");
+                const handle = container.querySelector(".slider-handle");
+
+                const initialPercentage = 50;
+                handle.style.left = `${initialPercentage}%`;
+                afterImage.style.clipPath = `inset(0 ${100 - initialPercentage}% 0 0)`;
+
+                let dragging = false;
+
+                handle.addEventListener("mousedown", (e) => {
+                    dragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener("mouseup", () => dragging = false);
+                document.addEventListener("mouseleave", () => dragging = false);
+
+                document.addEventListener("mousemove", (e) => {
+                    if (!dragging) return;
+
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    let widthPercentage = (x / rect.width) * 100;
+
+                    widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                    handle.style.left = `${widthPercentage}%`;
+                    afterImage.style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+
+                handle.addEventListener("touchstart", (e) => {
+                    dragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener("touchend", () => dragging = false);
+
+                container.addEventListener("touchmove", (e) => {
+                    if (!dragging) return;
+
+                    const rect = container.getBoundingClientRect();
+                    const x = e.touches[0].clientX - rect.left;
+                    let widthPercentage = (x / rect.width) * 100;
+
+                    widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                    handle.style.left = `${widthPercentage}%`;
+                    afterImage.style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

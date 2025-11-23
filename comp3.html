@@ -5,7 +5,8 @@
     <title>VersionVersus Mario 64 VS Remake</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This comparsions explores the differences between Mario 64 on the N64 vs the DS remake. It details visuals, gameplay, and how the remake's added content changes it.">
+    <meta name="description"
+        content="This comparsions explores the differences between Mario 64 on the N64 vs the DS remake. It details visuals, gameplay, and how the remake's added content changes it.">
     <link rel="stylesheet" href="VersionVersus.css">
 </head>
 
@@ -60,8 +61,11 @@
                     that it became
                     a radically different game.
                 </p>
-                <div class="articlepic"><img src="ogbobomb.png" alt="A picture of the Original Mario 64"></div>
-                <div class="articlepic"><img src="rebobomb.png" alt="A picture of the Mario 64 DS Remake"></div>
+                <div class="custom-image-slider">
+                    <img src="ogbobomb.png" class="slider-before" alt="Before image of OG Bobomb Battlefield">
+                    <img src="rebobomb.png" class="slider-after" alt="After image of DS Bobomb Battlefield">
+                    <div class="slider-handle"></div>
+                </div>
                 <p>The DS having 2 screens doesn't always take advantage of it, as most of the time it just shows the
                     map
                     in this game. Visually the screenshot nor video does justice to how it looks on a tiny DS screen
@@ -117,6 +121,63 @@
             <a href="mailto:jf00264@my.westga.edu">jf00264@my.westga.edu</a>
         </footer>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sliders = document.querySelectorAll(".custom-image-slider");
+
+            sliders.forEach((container) => {
+                const afterImage = container.querySelector(".slider-after");
+                const handle = container.querySelector(".slider-handle");
+
+                const initialPercentage = 50;
+                handle.style.left = `${initialPercentage}%`;
+                afterImage.style.clipPath = `inset(0 ${100 - initialPercentage}% 0 0)`;
+
+                let dragging = false;
+
+                handle.addEventListener("mousedown", (e) => {
+                    dragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener("mouseup", () => dragging = false);
+                document.addEventListener("mouseleave", () => dragging = false);
+
+                document.addEventListener("mousemove", (e) => {
+                    if (!dragging) return;
+
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    let widthPercentage = (x / rect.width) * 100;
+
+                    widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                    handle.style.left = `${widthPercentage}%`;
+                    afterImage.style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+
+                handle.addEventListener("touchstart", (e) => {
+                    dragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener("touchend", () => dragging = false);
+
+                container.addEventListener("touchmove", (e) => {
+                    if (!dragging) return;
+
+                    const rect = container.getBoundingClientRect();
+                    const x = e.touches[0].clientX - rect.left;
+                    let widthPercentage = (x / rect.width) * 100;
+
+                    widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                    handle.style.left = `${widthPercentage}%`;
+                    afterImage.style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

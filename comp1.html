@@ -5,7 +5,8 @@
     <title>VersionVersus Silent Hill 2 VS Remake</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This article compares the 2002 PS2 classic Silent Hill 2 against it's remake in terms of gameplay, visuals, art direction etc. It includes videos, and images.">
+    <meta name="description"
+        content="This article compares the 2002 PS2 classic Silent Hill 2 against it's remake in terms of gameplay, visuals, art direction etc. It includes videos, and images.">
     <link rel="stylesheet" href="VersionVersus.css">
 </head>
 
@@ -52,15 +53,21 @@
                     The OG has the classic fixed camera angles with tank controls, a staple of the horror
                     game genre in its day while the remake has an over the shoulder dynamic camera.
                 </p>
-                <div class="articlepic"><img src="sh2fog.png" alt="A picture of the Original Silent Hil 2"></div>
-                <div class="articlepic"><img src="sh2refog.jpg" alt="A picture of the Silent Hil 2 Remake"></div>
+                <div class="custom-image-slider">
+                    <img src="sh2fog.png" class="slider-before" alt="Before Image of OG SH2">
+                    <img src="sh2refog.jpg" class="slider-after" alt="After image of SH2 Remake">
+                    <div class="slider-handle"></div>
+                </div>
                 <p>This creates a very different feeling while playing the game as the remake doesn't give me
                     as much anxiety or claustrophobia. Graphically the remake is stunning, but the grimy noisy
                     look of the original is not replicated. The fog especially is something PS2s did very well!
                     The remake can look pretty gruesome at times with all the gory details.
                 </p>
-                <div class="articlepic"><img src="oldjames.jpg" alt="A picture of OG James"></div>
-                <div class="articlepic"><img src="newjames.jpg" alt="A picture of new James"></div>
+                <div class="custom-image-slider">
+                    <img src="oldjames.jpg" class="slider-before" alt="Before Image of James in OG SH2">
+                    <img src="newjames.jpg" class="slider-after" alt="After image of James in SH2 Remake">
+                    <div class="slider-handle"></div>
+                </div>
                 <p>Stylistically, these screenshots encapsulate their differences. I'd describe James,
                     the main character, as appearing to see the main character, as appearing to harbor a deep, dark
                     side to him. It's as though he's looking at a man changed by some pivotal event. But the
@@ -97,6 +104,63 @@
             <a href="mailto:jf00264@my.westga.edu">jf00264@my.westga.edu</a>
         </footer>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sliders = document.querySelectorAll(".custom-image-slider");
+
+            sliders.forEach((container) => {
+                const afterImage = container.querySelector(".slider-after");
+                const handle = container.querySelector(".slider-handle");
+
+                const initialPercentage = 50;
+                handle.style.left = `${initialPercentage}%`;
+                afterImage.style.clipPath = `inset(0 ${100 - initialPercentage}% 0 0)`;
+
+                let dragging = false;
+
+                handle.addEventListener("mousedown", (e) => {
+                    dragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener("mouseup", () => dragging = false);
+                document.addEventListener("mouseleave", () => dragging = false);
+
+                document.addEventListener("mousemove", (e) => {
+                    if (!dragging) return;
+
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    let widthPercentage = (x / rect.width) * 100;
+
+                    widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                    handle.style.left = `${widthPercentage}%`;
+                    afterImage.style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+
+                handle.addEventListener("touchstart", (e) => {
+                    dragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener("touchend", () => dragging = false);
+
+                container.addEventListener("touchmove", (e) => {
+                    if (!dragging) return;
+
+                    const rect = container.getBoundingClientRect();
+                    const x = e.touches[0].clientX - rect.left;
+                    let widthPercentage = (x / rect.width) * 100;
+
+                    widthPercentage = Math.max(0, Math.min(widthPercentage, 100));
+
+                    handle.style.left = `${widthPercentage}%`;
+                    afterImage.style.clipPath = `inset(0 ${100 - widthPercentage}% 0 0)`;
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
